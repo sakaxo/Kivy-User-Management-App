@@ -1,0 +1,493 @@
+<WindowManager>:
+	LoginWindow:
+		name: "login"
+
+	ForgotPasswordWindow:
+		name: "forgotPassword"
+
+	PasswordResetDoneWindow:
+		name: "passwordResetDone"
+
+	RegistrationWindow:
+		name: "register"
+
+	MainWindow:
+		name: "main"
+		id: main
+
+
+
+<LoginWindow>:
+	name: "login"
+
+	BoxLayout:
+		size: root.width, root.height
+		pos: 0,0
+		orientation: 'vertical'
+
+		canvas.before:
+			Color:
+				rgba: (255/255, 50/255, 120/255, 0.8)
+			Rectangle:
+				pos: self.pos
+				size: self.size
+
+		AnchorLayout:
+			anchor_x: 'center'
+			anchor_y: 'center'
+
+			BoxLayout:
+				orientation: 'vertical'
+				size_hint: .5, .6
+				spacing: 5
+
+				canvas.before:
+					Color:
+						rgba: (0/255,36/255,107/255,0.75) 
+					Rectangle:
+						pos: self.pos
+						size: self.size
+
+				GridLayout:
+					cols: 1
+					spacing: 5
+					padding: 10 
+
+					Label:
+						text: "Login"
+						font_size: 35
+						text_size: self.size
+    					halign: 'left'
+    					valign: 'center'
+    					color: (202/255,220/255,252/255, 1)
+
+						canvas.before:
+							Color:
+								rgba: (0/255,36/255,107/255,1) 
+							Rectangle:
+								pos: self.pos
+								size: self.size
+					Label:
+						id: error
+						text: ""
+						markup: True
+						size_hint_y: 0.4
+						text_size: self.size
+    					halign: 'left'
+    					valign: 'top'
+
+					TextInput:
+						id: email
+						hint_text: 'EMAIL'
+						size_hint_y: None
+						height: 50
+						multiline: False
+
+					TextInput:
+						id: password
+						hint_text: 'PASSWORD'
+						password: True
+						size_hint_y: None
+						height: 50
+						multiline: False
+
+					Button:
+						text: "FORGOT YOUR PASSWORD?"
+						size_hint_y: .4 
+						background_normal: ''
+						background_color: (0/255,36/255,107/255,1)
+						color: (202/255,220/255,252/255, 1)
+						font_size: '15sp'
+
+						on_press: 
+							root.manager.current = "forgotPassword"
+							root.manager.transition.direction = 'up'
+
+
+				BoxLayout:
+					size_hint_y: None
+					height: 55
+
+					AnchorLayout:
+						anchor_x: 'left'
+						anchor_y: 'bottom'
+
+						Button:
+							text: 'Log In'
+							background_normal: ''
+							background_color: (64/255, 255/255, 32/255, 0.7)
+							color: 1,1,1,1
+
+							on_press: root.log_user_in()
+	
+					AnchorLayout:
+						anchor_x: 'right'
+						anchor_y: 'bottom'
+
+						Button:
+							text: 'Register >>'
+							on_press: 
+								root.manager.current = 'register'
+								root.manager.transition.direction = 'left'
+							
+<ForgotPasswordWindow>:
+	name: "forgotPassword"
+
+	BoxLayout:
+		size: root.width, root.height
+		pos: 0,0
+		orientation: 'vertical'
+
+		canvas.before:
+			Color:
+				rgba: (255/255, 50/255, 120/255, 0.8)
+			Rectangle:
+				pos: self.pos
+				size: self.size
+
+		AnchorLayout:
+			anchor_x: 'center'
+			anchor_y: 'center'
+
+			BoxLayout:
+				orientation: 'vertical'
+				size_hint: .5, .6
+				spacing: 5
+
+				canvas.before:
+					Color:
+						rgba: (0/255,36/255,107/255,0.75) 
+					Rectangle:
+						pos: self.pos
+						size: self.size
+
+				GridLayout:
+					cols: 1
+					spacing: 5
+					padding: 10 
+
+					Label:
+						text: "Password Reset"
+						font_size: 35
+						text_size: self.size
+    					halign: 'left'
+    					valign: 'center'
+    					color: (202/255,220/255,252/255, 1)
+
+						canvas.before:
+							Color:
+								rgba: (0/255,36/255,107/255,1) 
+							Rectangle:
+								pos: self.pos
+								size: self.size
+
+					Label:
+						id: error
+						text: ""
+						markup: True
+						size_hint_y: 0.4
+						text_size: self.size
+    					halign: 'left'
+    					valign: 'top'
+
+					TextInput:
+						id: email
+						hint_text: 'Enter your email'
+						size_hint_y: None
+						height: 50
+						multiline: False
+
+					Button:
+						text: "Reset Password Now"
+						size_hint_y: .4 
+						background_normal: ''
+						background_color: (0/255,36/255,107/255,1)
+						color: (202/255,220/255,252/255, 1)
+						font_size: '15sp'
+
+						on_press: 
+							root.reset_password()
+							
+							
+
+
+				BoxLayout:
+					size_hint_y: None
+					height: 55
+
+					AnchorLayout:
+						anchor_x: 'left'
+						anchor_y: 'bottom'
+
+						Button:
+							text: '<< Log In'
+
+							on_press: 
+								root.manager.current = 'login'
+								root.manager.transition.direction = 'right'
+	
+					AnchorLayout:
+						anchor_x: 'right'
+						anchor_y: 'bottom'
+
+						Button:
+							text: 'Register >>'
+							on_press: 
+								root.manager.current = 'register'
+								root.manager.transition.direction = 'left'
+							
+<PasswordResetDoneWindow>:
+	name: "passwordResetDone"
+
+	BoxLayout:
+		size: root.width, root.height
+		pos: 0,0
+		orientation: 'vertical'
+
+		canvas.before:
+			Color:
+				rgba: (255/255, 50/255, 120/255, 0.8)
+			Rectangle:
+				pos: self.pos
+				size: self.size
+
+		AnchorLayout:
+			anchor_x: 'center'
+			anchor_y: 'center'
+
+			BoxLayout:
+				orientation: 'vertical'
+				size_hint: .5, .6
+				spacing: 5
+
+				canvas.before:
+					Color:
+						rgba: (0/255,36/255,107/255,0.75) #(255/255, 255/255, 255/255, 0.9)
+					Rectangle:
+						pos: self.pos
+						size: self.size
+
+				GridLayout:
+					cols: 1
+					spacing: 5
+					padding: 10 
+
+					Label:
+						text: "Password Reset Done!"
+						font_size: 25
+						text_size: self.size
+    					halign: 'left'
+    					valign: 'center'
+    					color: (202/255,220/255,252/255, 1)
+
+						canvas.before:
+							Color:
+								rgba: (0/255,36/255,107/255,1) 
+							Rectangle:
+								pos: self.pos
+								size: self.size
+
+					Label:
+						text:"Your password has been reset successfully.\nLogin with new password sent to both your phone and email!."
+						text_size: self.size
+    					halign: 'left'
+    					valign: 'top'
+    					padding: 20, 20
+    					color: (202/255,220/255,252/255, 1)
+
+				BoxLayout:
+					size_hint_y: None
+					height: 45
+
+					AnchorLayout:
+						anchor_x: 'center'
+						anchor_y: 'bottom'
+
+						Button:
+							text: 'LogIn Here'
+
+							on_press: 
+								root.login_redirect()
+
+
+<RegistrationWindow>:
+	name: "register"
+
+	BoxLayout:
+		size: root.width, root.height
+		pos: 0,0
+		orientation: 'vertical'
+
+		canvas.before:
+			Color:
+				rgba: (255/255, 50/255, 120/255, 0.8) 
+
+			Rectangle:
+				pos: self.pos
+				size: self.size
+
+
+		AnchorLayout:
+			anchor_x: 'center'
+			anchor_y: 'center'
+
+			BoxLayout:
+				orientation: 'vertical'
+				size_hint: .5, .85
+				spacing: 5
+
+				BoxLayout:
+					orientation: 'vertical'
+					spacing: 15
+
+					canvas.before:
+						Color:
+							rgba: (0/255,36/255,107/255,0.75)
+						Rectangle:
+							pos: self.pos
+							size: self.size
+
+					Label:
+						text: 'REGISTRATION FORM'
+						size_hint_y: None
+						height: 50
+						font_size: '20sp'
+						color: (202/255,220/255,252/255, 1)
+
+						canvas.before:
+							Color:
+								rgba: (0/255,36/255,107/255,1) 
+							Rectangle:
+								pos: self.pos
+								size: self.size
+
+					GridLayout:
+						cols: 1
+						spacing: 15
+						size_hint_x: .95
+						pos_hint: {'x': .025} 
+						padding: 10
+
+						Label:
+							id: error
+							text: ""
+							markup: True
+							size_hint_y: 0.2
+							text_size: self.size
+	    					halign: 'left'
+	    					valign: 'top'
+
+
+						TextInput:
+							id: fname
+							hint_text: 'First name'
+							multiline: False
+							size_hint_y: None
+							height: 45
+
+						TextInput:
+							id: lname
+							hint_text: 'Last name'
+							multiline: False
+							size_hint_y: None
+							height: 45
+
+						TextInput:
+							id: email
+							hint_text: 'Email'
+							multiline: False
+							size_hint_y: None
+							height: 45
+
+						TextInput:
+							id: phone
+							hint_text: 'Phone'
+							multiline: False
+							size_hint_y: None
+							height: 45
+
+						TextInput:
+							id: password
+							hint_text: 'Password'
+							password: True
+							multiline: False
+							size_hint_y: None
+							height: 45
+
+
+		    		BoxLayout:
+		    			size_hint_y: None
+		    			height: 55
+
+		    			AnchorLayout:
+		    				anchor_x: 'left'
+							anchor_y: 'bottom'
+
+		    				Button:
+			    				text: '<< Log In'
+			    				on_press: 
+			    					root.manager.current = 'login'
+			    					root.manager.transition.direction = 'right'
+
+
+			    		AnchorLayout:
+		    				anchor_x: 'right'
+							anchor_y: 'bottom'
+
+		    				Button:
+			    				text: 'Register Now'
+
+			    				background_normal: ''
+			    				background_color: (64/255, 255/255, 32/255, 0.7)
+
+			    				on_press: root.register_user()
+
+
+<MainWindow>:
+	name: 'main'
+
+
+	BoxLayout:
+		size: root.width, root.height
+		pos: 0,0
+		orientation: 'vertical'
+
+		canvas.before:
+			Color:
+				rgba: (0/255,36/255,107/255,0.75)
+			Rectangle:
+				pos: self.pos
+				size: self.size
+
+		GridLayout:
+			cols: 1
+
+			Label:
+				id: uname
+				#f"Welcome back, {root.username}"
+				text: ""
+				size_hint_y: None
+				height: 40
+
+			Button:
+				text: "Basic Management System Dashboard"
+				font_size: 25
+				bold: True
+				size_hint_y: .2
+
+			Label:
+				text: "Make a nice design with more functionality depending on your need!"
+				font_size: 20
+
+			Button:
+				text: "Logout"
+				size_hint: None, .2
+				width: 150
+				pos_hint: {'x'}
+
+				on_press: root.logout()
+
+
+							
+
+
